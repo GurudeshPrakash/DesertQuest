@@ -1,0 +1,164 @@
+
+.profile-container {
+  position: relative;
+  height: 100vh;
+  background: url("new.png") no-repeat center center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  font-family: "Poppins", sans-serif;
+  color: #3d2200;
+}
+
+
+.cloud {
+position: absolute;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  animation: cloudFloat 30s linear infinite;
+  z-index: 2;
+}
+
+.cloud-1 {
+    top: 15%;
+  left: -150px;
+  width: 120px;
+  height: 40px;
+  animation-delay: 0s;
+}
+
+.cloud-2 {
+   top: 25%;
+  right: -150px;
+  width: 150px;
+  height: 45px;
+  animation-delay: 10s;
+}
+
+.cloud-3 {
+  top: 70%;
+  left: -250px;
+  width: 100px;
+  height: 50px;
+  animation-delay: 20s;
+}
+
+@keyframes floatClouds {
+   0% { transform: translateX(-200px); }
+  100% { transform: translateX(calc(100vw + 300px)); }
+}
+
+
+.profile-box {
+  background: linear-gradient(180deg, #fff4d4, #ffe4a1);
+  border-radius: 25px;
+  padding: 2.5rem 3rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  z-index: 2;
+  width: 340px;
+  animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+.profile-header {
+  margin-bottom: 1.5rem;
+}
+
+.profile-icon {
+  font-size: 4rem;
+  color: #cfa74e;
+  margin-bottom: 0.5rem;
+}
+
+
+.profile-stats h3 {
+  background: #fff7e0;
+  border: 2px dashed #cfa74e;
+  border-radius: 10px;
+  padding: 10px;
+  display: inline-block;
+  color: #5a3b09;
+  margin-bottom: 1rem;
+}
+
+
+.profile-scores h3 {
+  color: #5a3b09;
+  margin-bottom: 10px;
+}
+
+.score-cards {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.score-card {
+  background: #ffffffd9;
+  border: 2px solid #cfa74e;
+  border-radius: 15px;
+  padding: 10px 15px;
+  box-shadow: 0 4px 8px rgba(100, 50, 0, 0.2);
+}
+
+.score-card p {
+  font-weight: bold;
+  color: #4a2d04;
+  margin: 0;
+}
+
+.score-card span {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #e09b1a;
+}
+
+.score-icon {
+  color: #ffc107;
+  font-size: 1.2rem;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 1.5rem;
+}
+
+.desert-button,
+.logout-button {
+  background-color: #e8b647;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  padding: 12px;
+  border-radius: 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.desert-button:hover,
+.logout-button:hover {
+  background-color: #cf9d2f;
+  transform: scale(1.05);
+}
+
+.loading-message {
+  text-align: center;
+  color: #5a3b09;
+  font-size: 1.2rem;
+}

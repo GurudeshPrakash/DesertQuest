@@ -1,0 +1,259 @@
+
+.game-desert-containerL {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(to bottom, #fddbb3, #f5a962, #e27b36);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #3b1d00;
+}
+
+/* Heat waves shimmer */
+.heat-waves {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0) 10%
+  );
+  animation: heatWave 3s infinite linear;
+  opacity: 0.5;
+}
+
+@keyframes heatWave {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-10px); }
+}
+
+/* Sun */
+.sun {
+  position: absolute;
+  top: 40px;
+  right: 60px;
+  width: 130px;
+  height: 130px;
+  background: radial-gradient(circle, #ffed85, #f9b233);
+  border-radius: 50%;
+  box-shadow: 0 0 80px 20px rgba(255, 217, 84, 0.7);
+  z-index: 0;
+}
+
+/* Clouds */
+.cloud {
+   position: absolute;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  animation: cloudFloat 30s linear infinite;
+  z-index: 2;
+}
+
+
+
+.cloud-1 {
+  top: 15%;
+  left: -150px;
+  width: 120px;
+  height: 40px;
+  animation-delay: 0s;
+}
+.cloud-2 {
+   top: 25%;
+  right: -150px;
+  width: 150px;
+  height: 45px;
+  animation-delay: 10s;
+}
+@keyframes cloudMove {
+   0% { transform: translateX(-200px); }
+  100% { transform: translateX(calc(100vw + 300px)); }
+}
+
+
+.game-contentL {
+  z-index: 2;
+  text-align: center;
+  max-width: 600px;
+  width: 90%;
+}
+
+.headerL {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.score-boxL {
+  background: rgba(255, 255, 255, 0.4);
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #3b1d00;
+}
+
+/* Quiz image */
+.quiz-sectionL {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: -40px; /* lift everything upward */
+  z-index: 5;
+  position: relative;
+}
+
+.quiz-imageL {
+  width: 620px; 
+  height: 200px; 
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  object-fit: contain; 
+  margin-top: 10px;
+}
+
+
+.answers-gridL {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+  margin-top: 40px;
+  width: 100%;
+  max-width: 600px;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 25px 30px;
+  border-radius: 25px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 6;
+}
+
+.game-desert-containerL {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #3b1d00;
+    background-image: url("new.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+
+
+
+/* Day & Night background gradients */
+@keyframes levelBgFade {
+  0% {
+    background-image: url("new.png");
+  }
+  50% {
+    background-image: url("new.png");
+  }
+  100% {
+    background-image: url("new.png");
+  }
+}
+
+.day {
+  color: #2e1a09;
+}
+
+.nightL {
+  
+  color: #fff8e1;
+}
+
+
+
+.sun,
+.moon,
+.stars {
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.day .sun {
+  opacity: 1;
+  transform: scale(1);
+}
+.night .sun {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.day .moon {
+  opacity: 0;
+  transform: scale(0.8);
+}
+.night .moon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.day .stars {
+  opacity: 0;
+}
+.night .stars {
+  opacity: 1;
+}
+
+
+.toggle-theme-btnL {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.85);
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+.toggle-theme-btnL:hover {
+  transform: translateY(-2px);
+  background: #ff9800;
+  color: white;
+}
+
+.desert-answer-btnL {
+  background: #fbe8a6;
+  border: none;
+  border-radius: 40px;
+  padding: 20px 50px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  color: #3b1d00;
+  transition: all 0.3s ease;
+}
+
+.desert-answer-btnL:hover {
+  background: #ff9d00;
+  color: white;
+  transform: scale(1.08);
+}
+
+
+
+
+
+

@@ -1,0 +1,131 @@
+
+.desert-containerL {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+
+  background: url("new.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+
+  overflow: hidden;
+  transition: background 1s ease-in-out;
+}
+
+
+.day {
+  filter: brightness(1);
+}
+
+.nightL {
+  filter: brightness(0.6);
+}
+
+
+.cloudL {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  animation: cloudFloat 30s linear infinite;
+  z-index: 2;
+}
+
+.cloud-1L {
+  top: 15%;
+  left: -150px;
+  width: 120px;
+  height: 40px;
+  animation-delay: 0s;
+}
+
+.cloud-2L {
+  top: 25%;
+  right: -150px;
+  width: 150px;
+  height: 45px;
+  animation-delay: 10s;
+}
+
+@keyframes cloudFloat {
+  0% { transform: translateX(-200px); }
+  100% { transform: translateX(calc(100vw + 300px)); }
+}
+
+.desert-container.night .cloud {
+  opacity: 0.4;
+}
+
+
+
+.content-boxL {
+  position: relative;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  padding: 40px 60px;
+  border-radius: 20px;
+  text-align: center;
+  color: #fff;
+  z-index: 3;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.landing-titleL {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+
+.button-boxL {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.desert-btnL,
+.toggle-theme-btnL {
+  background: #c97b3e;
+  border: none;
+  padding: 15px 35px;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.3s, background 0.3s;
+}
+
+.desert-btnL:hover,
+.toggle-theme-btnL:hover {
+  transform: scale(1.05);
+  background: #a8622e;
+}
+
+
+.sun,
+.moon {
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.sun {
+  background: radial-gradient(circle, #fff176 40%, #fbc02d 80%);
+}
+
+.moon {
+  background: radial-gradient(circle, #eceff1 40%, #90a4ae 80%);
+}
