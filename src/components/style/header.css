@@ -1,17 +1,15 @@
- html, body {
+html, body {
   height: 100%;
   margin: 0;
   overflow: hidden; 
-
-
 }
+
 @font-face {
   font-family: 'KnightWarrior';
   src: url('KnightWarrior-w16n8.otf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
-
 
 .header {
   position: relative;
@@ -20,27 +18,26 @@
   align-items: center;
   padding: 50px 20px 15px 20px; 
   background: transparent;
-  color: white;
+  color: blue;
   z-index: 100;
 }
+
 .logo-link {
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Funky animated logo */
+/* 🏜️ Game Logo Text (kept same as before) */
 .logo {
-  
   font-family: 'KnightWarrior', sans-serif;
-  color: #fff;
-  font-size: 100rem;
+  color: skyblue;
   font-weight: normal;
   letter-spacing: 3px;
-
-  animation: heatShimmer 3s ease-in-out infinite;
-
   font-size: 3rem;
+  margin-top: 30px;
 
-  letter-spacing: 3px;
   background: linear-gradient(90deg, #ff9f1c, #ffbf69, #ff0054, #00f5d4);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -51,62 +48,66 @@
   user-select: none;
   text-align: center;
   transition: transform 0.3s ease;
- margin-top: 30px;
 }
 
 .logo:hover {
-
   text-shadow: 0 0 15px rgba(255, 255, 100, 0.9);
 }
 
-/* Animation for the gradient */
-@keyframes colorFlow {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+/* 🌅 Optional Image Logo (NEW) */
+.logo-img {
+  height: 200px; /* adjust based on your logo size */
+  width: 200px;
+  object-fit: contain;
+  animation: bounce 2.5s ease-in-out infinite, colorPulse 6s ease-in-out infinite;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  filter: drop-shadow(0 0 10px rgba(255, 170, 50, 0.8));
 }
 
-/* Gentle bounce animation */
+.logo-img:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 20px rgba(255, 255, 100, 1));
+}
+
+/* ✨ Animated gradient for text */
+@keyframes colorFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Gentle bounce */
 @keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* 🔆 Subtle glow for image logo */
+@keyframes colorPulse {
+  0%, 100% { filter: drop-shadow(0 0 10px rgba(255, 180, 50, 0.8)); }
+  50% { filter: drop-shadow(0 0 25px rgba(255, 255, 150, 1)); }
 }
 
 /* --- Desert-Style Header Icons --- */
 .nav-icons {
   position: absolute;
   right: 60px;
-  top: 20%;
+  top: 30%;
   transform: translateY(-50%);
   display: flex;
-  gap: 49px; /* more space between icons */
+  gap: 60px;
   z-index: 10;
 }
 
-/* Funky Big Icons */
 .icon {
-  color: #fff8c2; /* warm desert sand tone */
+  color: black;
   text-decoration: none;
-  font-size: 7.8rem; /* make the icons BIGGER */
-  transition: 
-    transform 0.25s ease-in-out,
-    color 0.3s ease,
-    text-shadow 0.3s ease;
+  font-size: 12rem;
+  transition: transform 0.25s ease-in-out, color 0.3s ease, text-shadow 0.3s ease;
   filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.4));
   cursor: pointer;
 }
 
-/* Hover: playful bounce + glow */
 .icon:hover {
   color: #ffe15d;
   transform: scale(1.3) rotate(-8deg);
@@ -117,7 +118,6 @@
   animation: wobble 0.6s ease-in-out;
 }
 
-/* Funky wobble animation */
 @keyframes wobble {
   0% { transform: scale(1.2) rotate(0deg); }
   25% { transform: scale(1.25) rotate(-8deg); }
@@ -126,17 +126,18 @@
   100% { transform: scale(1.2) rotate(0deg); }
 }
 
-/* On click (active) press-down feedback */
 .icon:active {
   transform: scale(1.1) rotate(0deg);
   color: #ffd43b;
 }
 
-
-/* Responsive styling for smaller screens */
 @media (max-width: 600px) {
   .logo {
-    font-size: 100rem;
+    font-size: 2rem;
+  }
+
+  .logo-img {
+    height: 50px;
   }
 
   .nav-icons {

@@ -12,8 +12,8 @@ import Profile from "./pages/Profile";
 import Leaderboard from "./pages/LeaderBoard";
 
 import { ThemeProvider } from "./context/ThemeContext";
-import { MusicProvider } from "./context/MusicContext"; // 🎵
-import MusicToggleButton from "./components/MusicToggleButton"; // 🎵
+import { MusicProvider } from "./context/MusicContext"; 
+import MusicToggleButton from "./components/MusicToggleButton"; 
 
 import "./App.css";
 
@@ -21,13 +21,10 @@ function App() {
   return (
     <ThemeProvider>
       <MusicProvider>
-        {/* Global Header */}
+        
         <Header />
-
-        {/* 🎶 Floating Music Control */}
         <MusicToggleButton />
 
-        {/* Routes */}
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/disclaimer" element={<Disclaimer />} />
@@ -39,6 +36,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
         </Routes>
+        
       </MusicProvider>
     </ThemeProvider>
   );

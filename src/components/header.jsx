@@ -1,14 +1,17 @@
 import { Link } from "react-router-dom";
 import { FaUser, FaTrophy } from "react-icons/fa";
 import "./style/header.css";
+import logo from "./style/desetquestlogo.png"; // ✅ import your image
 
 const Header = () => {
   return (
     <header className="header">
-           
-      <h1 className="logo">Desert Quest</h1>
-      <Link to="/desertAuth" className="logo-link"></Link>
+      {/* 🏜️ Game Logo */}
+      <Link to="./" className="logo-link">
+        <img src={logo} alt="Desert Quest" className="logo-img" />
+      </Link>
 
+      {/* 🏆 & 👤 Icons */}
       <nav className="nav-icons">
         <Link to="/leaderboard" className="icon">
           <FaTrophy size={24} />
