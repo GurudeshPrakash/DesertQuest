@@ -1,7 +1,7 @@
 
 
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, GoogleAuthProvider} from "firebase/auth";
 import { getFirestore } from "@firebase/firestore";
 
 
@@ -19,7 +19,8 @@ const app = initializeApp(firebaseConfig);
 
 // ✅ Export singletons
 const auth = getAuth(app);
-const db = getFirestore(app);
 const provider = new GoogleAuthProvider();
+const db = getFirestore(app);
 
-export { app, auth, db };
+
+export { app, auth, db,provider };

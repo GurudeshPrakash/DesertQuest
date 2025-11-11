@@ -144,6 +144,42 @@ position: absolute;
   background-color: #f9d076;
   transform: scale(1.05);
 }
+.google-btn {
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 25px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 12px;
+  transition: all 0.3s ease;
+}
+
+.google-btn:hover {
+  background-color: #357ae8;
+  transform: scale(1.05);
+}
+
+.guest-btn {
+  background-color: #e0a437;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 25px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+.guest-btn:hover {
+  background-color: #c68f2b;
+  transform: scale(1.05);
+}
+
 
 
 .auth-guest {
