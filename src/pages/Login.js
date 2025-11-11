@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { auth, db, provider } from "../firebase";
 import "./style/auth.css";
 
 const Login = () => {
@@ -10,9 +11,22 @@ const Login = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+
+  const validateEmail=(email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+
+
+  // 🔹 Normal Email/Password Login
   const handleLogin = async (e) => {
     e.preventDefault();
     setError(null);
+
+    if (!validateEmail(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
 
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
@@ -25,7 +39,31 @@ const Login = () => {
     }
   };
 
-  const playAsGuest = () => navigate("/profile");
+  // 🔹 Google Login
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      const userRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(userRef);
+
+      if (!docSnap.exists()) {
+        await setDoc(userRef, {
+          name: user.displayName || "New Player",
+          email: user.email,
+          highestScore: 0,
+          score: { Level1: 0, Level2: 0, Level3: 0 },
+          createdAt: new Date().toISOString(),
+        });
+      }
+
+      navigate("/level");
+    } catch (error) {
+      console.error("Google Sign-In failed:", error);
+      setError("Google sign-in failed. Please try again.");
+    }
+  };
 
   return (
     <div className="auth-container">
@@ -60,14 +98,17 @@ const Login = () => {
           </button>
         </form>
 
+        {/* 🔹 Google Login Button */}
+        <button className="google-btn" onClick={handleGoogleLogin}>
+          Sign in with Google
+        </button>
+
         <p className="auth-toggle">
           Don't have an account?{" "}
           <Link to="/signup" className="auth-link">
             Sign Up
           </Link>
         </p>
-
-       
       </div>
     </div>
   );

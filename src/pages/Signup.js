@@ -15,9 +15,28 @@ const Signup = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+  const validateEmail=(email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+
+  const validatePassword=(password) => {
+    const regex=/^(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/;
+    return regex.test(password);
+  };
+
   const handleSignup = async (e) => {
     e.preventDefault();
     setError(null);
+
+    if (!validateEmail(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+    if (!validatePassword(password)) {
+      setError("Password must be at least 8 characters long, contain at least one uppercase letter and one special character.");
+      return;
+    }
 
     try {
       // ✅ Create user
@@ -40,7 +59,7 @@ const Signup = () => {
       const token = await user.getIdToken();
       localStorage.setItem("authToken", token);
 
-      navigate("/profile");
+      navigate("login");
     } catch (err) {
       console.error("Signup Error:", err);
       setError("Error: " + err.message);
