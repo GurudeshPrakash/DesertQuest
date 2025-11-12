@@ -23,8 +23,8 @@ const DesertAuth = () => {
       <div className="auth-heat-waves" ></div>
       <div className="auth-sun" ></div>
       {isNightL && <div className="moon"></div>}
-      <div className="auth-cloud auth-cloud-1" ></div>
-      <div className="auth-cloud auth-cloud-2" ></div>
+      <div className="cloud cloud-1" ></div>
+      <div className="cloud cloud-2" ></div>
 
 
  

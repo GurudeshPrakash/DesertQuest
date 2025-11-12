@@ -1,4 +1,13 @@
+body {
+   background: url("new.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 
+  overflow: hidden;
+  transition: background 1s ease-in-out;
+}
 .desert-containerL {
   position: relative;
   height: 100vh;
@@ -8,15 +17,89 @@
   align-items: center;
   flex-direction: column;
 
+}
+ .guess-btnL {
+  background: linear-gradient(135deg, #ffcf4d, #ff964d);
+  border: none;
+  padding: 12px 28px;
+  margin: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #3d2200;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0px 4px 12px rgba(255, 150, 0, 0.4);
+}
 
-  background: url("new.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+.guess-btnL:hover {
+  transform: scale(1.08);
+  background: linear-gradient(135deg, #ffb84d, #ff7a00);
+}
 
-  overflow: hidden;
+/* 🌤️ Weather Box */
+.weather-boxL {
+  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.25);
+  padding: 15px 25px;
+  border-radius: 18px;
+  color: #fff;
+  font-size: 1.1rem;
+  text-align: center;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+  animation: fadeIn 1.2s ease-in-out;
+}
+
+.weather-icon {
+  font-size: 2rem;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+/* 🌈 Weather Mood Overlay */
+.desert-containerL::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
   transition: background 1s ease-in-out;
+}
+
+/* Mood Gradients on top of your image */
+.sunny::before {
+  background: linear-gradient(to top, rgba(247, 208, 122, 0.4), rgba(249, 247, 232, 0.2));
+}
+.hot::before {
+  background: linear-gradient(to top, rgba(255, 145, 77, 0.5), rgba(255, 216, 155, 0.3));
+}
+.cold::before {
+  background: linear-gradient(to top, rgba(116, 185, 255, 0.5), rgba(223, 230, 233, 0.3));
+}
+.windy::before {
+  background: linear-gradient(to top, rgba(200, 214, 229, 0.5), rgba(245, 246, 250, 0.3));
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
 }
 
 

@@ -10,8 +10,7 @@ import Level from "./pages/Levels";
 import Header from "./components/header";
 import Profile from "./pages/Profile";
 import Leaderboard from "./pages/LeaderBoard";
-
-import { ThemeProvider } from "./context/ThemeContext";
+import { WeatherProvider } from "./context/WeatherContext";
 import { MusicProvider } from "./context/MusicContext"; 
 import MusicToggleButton from "./components/MusicToggleButton"; 
 
@@ -19,7 +18,7 @@ import "./App.css";
 
 function App() {
   return (
-    <ThemeProvider>
+    <WeatherProvider>
       <MusicProvider>
         
         <Header />
@@ -38,7 +37,7 @@ function App() {
         </Routes>
         
       </MusicProvider>
-    </ThemeProvider>
+    </WeatherProvider>
   );
 }
 

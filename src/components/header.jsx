@@ -6,9 +6,10 @@ import logo from "./style/desetquestlogo.png"; // ✅ import your image
 const Header = () => {
   return (
     <header className="header">
-      {/* 🏜️ Game Logo */}
-      <Link to="./" className="logo-link">
+      {/* 🏜️ Game Logo + Name */}
+      <Link to="/" className="logo-link">
         <img src={logo} alt="Desert Quest" className="logo-img" />
+        <h1 className="logo-text">Desert Quest</h1>
       </Link>
 
       {/* 🏆 & 👤 Icons */}

@@ -1,72 +1,48 @@
 import React, { useEffect, useState } from "react";
 import { FaChartLine, FaStar, FaCrown } from "react-icons/fa";
-import { auth, db } from "../firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase";
+import { collection, getDocs } from "firebase/firestore";
 import "./style/LeaderBoard.css";
 
 const Leaderboard = () => {
-  const [userData, setUserData] = useState(null);
-  const [scores, setScores] = useState({ Level1: 0, Level2: 0, Level3: 0 });
+  const [users, setUsers] = useState([]);
   const [selectedLevel, setSelectedLevel] = useState("Level1");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchUserScores = async () => {
-      const unsubscribe = auth.onAuthStateChanged(async (user) => {
-        if (!user) {
-          console.warn("No user logged in");
-          setLoading(false);
-          return;
-        }
+    const fetchAllScores = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "users"));
+        const userList = [];
 
-        try {
-          const userDocRef = doc(db, "users", user.uid);
-          const userDoc = await getDoc(userDocRef);
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          const scoreData = data.score || {};
+          userList.push({
+            id: doc.id,
+            name: data.name || "Unknown Player",
+            email: data.email || "No email",
+            Level1: scoreData.Level1 || 0,
+            Level2: scoreData.Level2 || 0,
+            Level3: scoreData.Level3 || 0,
+          });
+        });
 
-          if (userDoc.exists()) {
-            const data = userDoc.data();
-            console.log("✅ User data from Firestore:", data);
+        // Sort descending by selected level’s score
+        userList.sort((a, b) => b[selectedLevel] - a[selectedLevel]);
 
-            // 🔹 Handle your structure (score.Level3, etc.)
-            const scoreData = data.score || {};
-            const formattedScores = {
-              Level1: scoreData.Level1 || 0,
-              Level2: scoreData.Level2 || 0,
-              Level3: scoreData.Level3 || 0,
-            };
-
-            setUserData({
-              name: data.name || "Unknown Player",
-              email: data.email || "No email",
-            });
-
-            setScores(formattedScores);
-          } else {
-            console.warn("⚠️ No document found for this user!");
-          }
-        } catch (err) {
-          console.error("Error fetching user data:", err);
-        } finally {
-          setLoading(false);
-        }
-      });
-
-      return () => unsubscribe();
+        setUsers(userList);
+      } catch (err) {
+        console.error("Error fetching all users:", err);
+      } finally {
+        setLoading(false);
+      }
     };
 
-    fetchUserScores();
-  }, []);
+    fetchAllScores();
+  }, [selectedLevel]); // refetch when level changes
 
-  if (loading) return <div className="leaderboard-loading">Loading your stats...</div>;
-
-  if (!userData)
-    return (
-      <div className="leaderboard-loading">
-        Please log in to view your leaderboard.
-      </div>
-    );
-
-  const currentScore = scores[selectedLevel] || 0;
+  if (loading) return <div className="leaderboard-loading">Loading leaderboard...</div>;
 
   return (
     <div className="leaderboard-container">
@@ -76,15 +52,8 @@ const Leaderboard = () => {
 
       <div className="leaderboard-box">
         <h1 className="leaderboard-title">
-          <FaChartLine /> Your Leaderboard
+          <FaChartLine /> Global Leaderboard
         </h1>
-
-        <div className="player-info">
-          <p className="player-name">
-            <FaCrown className="icon" /> {userData.name}
-          </p>
-          <p className="player-email">{userData.email}</p>
-        </div>
 
         {/* Level Selector */}
         <select
@@ -97,12 +66,37 @@ const Leaderboard = () => {
           <option value="Level3">🥉 Advanced</option>
         </select>
 
-        {/* Score Display */}
-        <div className="score-display">
-          <FaStar className="score-icon" />
-          <h2>{selectedLevel}</h2>
-          <p className="score-value">{currentScore} pts</p>
-        </div>
+        {/* 🏅 Leaderboard Table */}
+        <table className="leaderboard-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Player</th>
+              <th>Email</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users
+              .sort((a, b) => b[selectedLevel] - a[selectedLevel])
+              .map((user, index) => (
+                <tr key={user.id}>
+                  <td>
+                    {index === 0 ? (
+                      <FaCrown color="gold" />
+                    ) : (
+                      index + 1
+                    )}
+                  </td>
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+                  <td>
+                    <FaStar className="score-icon" /> {user[selectedLevel]} pts
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
 
         <button className="back-btn" onClick={() => window.history.back()}>
           ⬅ Back
