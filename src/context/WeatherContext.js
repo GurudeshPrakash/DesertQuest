@@ -15,13 +15,35 @@ export const WeatherProvider = ({ children }) => {
   useEffect(() => {
     const fetchWeather = async (lat, lon) => {
       try {
-        const res = await fetch(
-          `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`
-        );
+        if (!lat || !lon || isNaN(lat) || isNaN(lon)) {
+          console.error("Invalid coordinates:", lat, lon);
+          return;
+        }
+
+        // ✅ Updated API endpoint
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m`;
+
+        console.log("Fetching weather from:", url);
+
+        const res = await fetch(url);
         const data = await res.json();
-        const current = data.current_weather;
-        setWeather(current);
-        updateWeatherMood(current);
+
+        // 🕒 Get current hour’s temperature if available
+        const now = new Date();
+        const currentHour = now.toISOString().slice(0, 13) + ":00";
+        const hourIndex = data.hourly?.time?.indexOf(currentHour);
+        const currentTemp =
+          hourIndex !== -1 && hourIndex !== undefined
+            ? data.hourly.temperature_2m[hourIndex]
+            : null;
+
+        if (currentTemp !== null) {
+          const current = { temperature: currentTemp, windspeed: 10 }; // no wind data in hourly call
+          setWeather(current);
+          updateWeatherMood(current);
+        } else {
+          console.warn("No temperature data found for current hour:", data);
+        }
       } catch (err) {
         console.error("Weather fetch failed:", err);
       } finally {
@@ -29,15 +51,16 @@ export const WeatherProvider = ({ children }) => {
       }
     };
 
+    // 📍 Get user location or fallback to Berlin
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (pos) => {
           fetchWeather(pos.coords.latitude, pos.coords.longitude);
         },
-        () => fetchWeather(23.4162, 25.6628) // fallback
+        () => fetchWeather(52.52, 13.41)
       );
     } else {
-      fetchWeather(23.4162, 25.6628);
+      fetchWeather(52.52, 13.41);
     }
   }, []);
 

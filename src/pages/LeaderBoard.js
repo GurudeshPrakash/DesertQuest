@@ -1,15 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { FaChartLine, FaStar, FaCrown } from "react-icons/fa";
-import { db } from "../firebase";
+import { db, auth } from "../firebase"; // ✅ import auth
 import { collection, getDocs } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth"; // ✅ import this
+import { useNavigate } from "react-router-dom"; // ✅ for redirect
 import "./style/LeaderBoard.css";
 
 const Leaderboard = () => {
   const [users, setUsers] = useState([]);
   const [selectedLevel, setSelectedLevel] = useState("Level1");
   const [loading, setLoading] = useState(true);
+  const [userLoggedIn, setUserLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
+  // ✅ Check login status
   useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUserLoggedIn(true);
+      } else {
+        setUserLoggedIn(false);
+        navigate("/login"); // redirect to login page
+      }
+    });
+
+    return () => unsubscribe();
+  }, [navigate]);
+
+  // ✅ Fetch scores (only if logged in)
+  useEffect(() => {
+    if (!userLoggedIn) return;
+
     const fetchAllScores = async () => {
       try {
         const querySnapshot = await getDocs(collection(db, "users"));
@@ -28,9 +49,7 @@ const Leaderboard = () => {
           });
         });
 
-        // Sort descending by selected level’s score
         userList.sort((a, b) => b[selectedLevel] - a[selectedLevel]);
-
         setUsers(userList);
       } catch (err) {
         console.error("Error fetching all users:", err);
@@ -40,9 +59,15 @@ const Leaderboard = () => {
     };
 
     fetchAllScores();
-  }, [selectedLevel]); // refetch when level changes
+  }, [selectedLevel, userLoggedIn]);
 
-  if (loading) return <div className="leaderboard-loading">Loading leaderboard...</div>;
+  if (!userLoggedIn) {
+    return <div className="leaderboard-loading">Redirecting to login...</div>;
+  }
+
+  if (loading) {
+    return <div className="leaderboard-loading">Loading leaderboard...</div>;
+  }
 
   return (
     <div className="leaderboard-container">
@@ -81,13 +106,7 @@ const Leaderboard = () => {
               .sort((a, b) => b[selectedLevel] - a[selectedLevel])
               .map((user, index) => (
                 <tr key={user.id}>
-                  <td>
-                    {index === 0 ? (
-                      <FaCrown color="gold" />
-                    ) : (
-                      index + 1
-                    )}
-                  </td>
+                  <td>{index === 0 ? <FaCrown color="gold" /> : index + 1}</td>
                   <td>{user.name}</td>
                   <td>{user.email}</td>
                   <td>
