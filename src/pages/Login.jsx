@@ -32,7 +32,7 @@ const Login = () => {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const token = await userCredential.user.getIdToken();
       localStorage.setItem("authToken", token);
-      navigate("/");
+      navigate("disclaimer");
     } catch (err) {
       console.error("Login Error:", err);
       setError("Invalid email or password");

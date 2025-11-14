@@ -116,10 +116,21 @@ const Leaderboard = () => {
               ))}
           </tbody>
         </table>
-
-        <button className="back-btn" onClick={() => window.history.back()}>
+        
+        <div className="button-group">
+          <button className="back-btn" onClick={() => navigate("/level")}>
           ⬅ Back
         </button>
+        <button className="back-btn" onClick={() => navigate("/profile")}>
+  👤 View Profile
+</button>
+
+
+
+
+
+        </div>
+        
       </div>
     </div>
   );

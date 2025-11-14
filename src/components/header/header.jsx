@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { FaUser, FaTrophy } from "react-icons/fa";
-import "./style/header.css";
-import logo from "./style/desetquestlogo.png"; // ✅ import your image
+import "./header.css";
+import logo from "./desetquestlogo.png"; // ✅ import your image
 
 const Header = () => {
   return (

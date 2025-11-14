@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { fetchQuizData } from "../Api/Heart";
-import CircularTimer from "../components/timer";
-import Message from "../components/message";
+import { fetchQuizData } from "../Services/Heart";
+import CircularTimer from "../components/timer/timer";
+import Message from "../components/message/message";
 import { useWeather } from "../context/WeatherContext"; // ✅ Weather context
 import { useTheme } from "../context/ThemeContext"; // ✅ Theme context
 import "./style/Game.css";
-import { updateUserScore } from "../Api/Score";
+import { updateUserScore } from "../Services/Score";
 
 const Game = () => {
   const location = useLocation();
