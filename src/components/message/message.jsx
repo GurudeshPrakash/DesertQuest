@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./style/message.css"; // Add styles for better UI
+import "./message.css"; // Add styles for better UI
 
 const Message = ({ message, score }) => {
   const [visible, setVisible] = useState(true);

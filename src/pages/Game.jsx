@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { fetchQuizData } from "../Api/Heart";
-import CircularTimer from "../components/timer";
-import Message from "../components/message";
-import { useTheme } from "../context/ThemeContext";
+import { fetchQuizData } from "../Services/Heart";
+import CircularTimer from "../components/timer/timer";
+import Message from "../components/message/message";
+import { useWeather } from "../context/WeatherContext"; // ✅ Weather context
+import { useTheme } from "../context/ThemeContext"; // ✅ Theme context
 import "./style/Game.css";
-import { updateUserScore } from "../Api/Score";
-
+import { updateUserScore } from "../Services/Score";
 
 const Game = () => {
   const location = useLocation();
@@ -14,7 +14,6 @@ const Game = () => {
   const queryParams = new URLSearchParams(location.search);
 
   const levelParam = queryParams.get("level") || "easy";
-
 
   const levelMap = {
     easy: 1,
@@ -25,6 +24,7 @@ const Game = () => {
   const level = levelMap[levelParam];
 
   const { isNightL } = useTheme();
+  const { weatherMood } = useWeather(); // ✅ bring in weather mood
 
   // 🕒 Timer duration by level
   const getTimeLimit = (level) => {
@@ -78,6 +78,7 @@ const Game = () => {
   const [questionCount, setQuestionCount] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [resultMessage, setResultMessage] = useState("");
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   // Generate 4 answer options
   const generateAnswerOptions = (correct) => {
@@ -96,6 +97,7 @@ const Game = () => {
     if (quizData) {
       const correct = Number(quizData.solution);
       const options = generateAnswerOptions(correct);
+       setIsImageLoaded(false);
       setQuizImage(quizData.question);
       setCorrectAnswer(correct);
       setAnswers(options);
@@ -106,7 +108,6 @@ const Game = () => {
     loadQuiz();
   }, []);
 
-  
   const handleAnswerClick = (answer) => {
     if (gameOver) return;
 
@@ -129,13 +130,11 @@ const Game = () => {
     }, 800);
   };
 
-  
   const handleGameOver = async (finalScore = score) => {
     setGameOver(true);
     setResultMessage("Game Over!");
     await updateUserScore(finalScore, level);
 
-  
     setTimeout(() => {
       navigate("/leaderboard");
     }, 3000);
@@ -144,12 +143,17 @@ const Game = () => {
   const handleTimeEnd = () => handleGameOver();
 
   return (
-    <div className={`game-desert-containerL ${isNightL ? "night" : "day"}`}>
-      {}
-      <div className="heat-waves"></div>
-      <div className="sun"></div>
-      <div className="moon"></div>
+    <div
+      className={`game-desert-containerL ${isNightL ? "night" : "day"} ${
+        weatherMood.moodClass
+      }`}
+    >
+      {/* Heat waves */}
+     
     
+      
+
+      {/* Clouds */}
       <div className="cloud cloud-1"></div>
       <div className="cloud cloud-2"></div>
 
@@ -158,13 +162,20 @@ const Game = () => {
       ) : (
         <div className="game-contentL">
           <div className="headerL">
-            <CircularTimer timeLimit={timeLimit} onTimeEnd={handleTimeEnd} />
+            <CircularTimer timeLimit={timeLimit} onTimeEnd={handleTimeEnd} isPaused={!isImageLoaded}/>
             <div className="score-boxL">Score: {score}</div>
           </div>
 
           {quizImage && (
             <div className="quiz-sectionL">
-              <img src={quizImage} alt="Quiz" className="quiz-imageL" />
+              <img src={quizImage} alt="Quiz" className="quiz-imageL"
+               onLoad={() => setIsImageLoaded(true)} // 🆕 start timer when image loads
+                onError={() => {
+                console.error("❌ Image failed to load — stopping timer");
+                setIsImageLoaded(false);
+                handleGameOver(); // stop the game if image fails
+      }}
+               />
               <div className="answers-gridL">
                 {answers.map((ans, i) => (
                   <button
@@ -181,12 +192,8 @@ const Game = () => {
         </div>
       )}
 
-      {}
       
-      <div className="cactus-group">
-        <div className="cactus-1"></div>
-        <div className="cactus-2"></div>
-      </div>
+      
     </div>
   );
 };

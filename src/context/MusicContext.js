@@ -3,7 +3,7 @@ import React, { createContext, useContext, useRef, useState, useEffect } from "r
 const MusicContext = createContext();
 
 export const MusicProvider = ({ children }) => {
-  const audioRef = useRef(new Audio("2music.mp3")); // 🎵 File in /public
+  const audioRef = useRef(new Audio("cowboys2.mp3")); // 🎵 File in /public
   const [isPlaying, setIsPlaying] = useState(true);
 
   useEffect(() => {

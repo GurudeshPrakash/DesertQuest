@@ -20,11 +20,10 @@ const DesertAuth = () => {
   return (
     <div className={`auth-desert-containerL ${isNightL ? "nightL" : "day"}`}>
    
-      <div className="auth-heat-waves" ></div>
-      <div className="auth-sun" ></div>
+
       {isNightL && <div className="moon"></div>}
-      <div className="auth-cloud auth-cloud-1" ></div>
-      <div className="auth-cloud auth-cloud-2" ></div>
+      <div className="cloud cloud-1" ></div>
+      <div className="cloud cloud-2" ></div>
 
 
  
@@ -41,9 +40,7 @@ const DesertAuth = () => {
         </div>
 
      
-        <button className="toggle-theme-btnL" onClick={toggleTheme}>
-          {isNightL ? "☀️ Day Mode" : "🌙 Night Mode"}
-        </button>
+      
       </div>
 
      

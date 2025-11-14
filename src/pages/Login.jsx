@@ -32,7 +32,7 @@ const Login = () => {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const token = await userCredential.user.getIdToken();
       localStorage.setItem("authToken", token);
-      navigate("/level");
+      navigate("disclaimer");
     } catch (err) {
       console.error("Login Error:", err);
       setError("Invalid email or password");
@@ -58,7 +58,7 @@ const Login = () => {
         });
       }
 
-      navigate("/level");
+      navigate("/");
     } catch (error) {
       console.error("Google Sign-In failed:", error);
       setError("Google sign-in failed. Please try again.");
@@ -68,9 +68,9 @@ const Login = () => {
   return (
     <div className="auth-container">
       {/* ☁️ Clouds */}
-      <div className="cloud"></div>
-      <div className="cloud"></div>
-      <div className="cloud"></div>
+      <div className="cloud cloud-1"></div>
+      <div className="cloud cloud-2"></div>
+ 
 
       <div className="auth-box">
         <h2 className="auth-title">Login</h2>

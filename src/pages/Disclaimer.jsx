@@ -18,12 +18,12 @@ function Disclaimer() {
   return (
     <div className={`desert-containerL ${isNightL ? "night" : "day"}`}>
       <div className="heat-wavesL"></div>
-      <div className="sun"></div>
-      <div className="moon"></div>
+      
+  
       
 
-      <div className="cloud cloud-1L"></div>
-      <div className="cloud cloud-2L"></div>
+      <div className="cloud cloud-1"></div>
+      <div className="cloud cloud-2"></div>
 
       <div className="disclaimer-boxL">
         <h1 className="disclaimer-titleL">DISCLAIMER</h1>

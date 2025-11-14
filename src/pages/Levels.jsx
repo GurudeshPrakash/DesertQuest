@@ -17,7 +17,7 @@ function Levels() {
     <div className={`levels-page desert-containerL ${isNightL ? "night" : "day"}`}>
       {/* Effects */}
       <div className="heat-waves"></div>
-      <div className="sun"></div>
+      
       <div className="moon"></div>
     
       <div className="cloud cloud-1"></div>

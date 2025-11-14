@@ -1,0 +1,110 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden; 
+}
+
+@font-face {
+  font-family: 'KnightWarrior';
+  src: url('KnightWarrior-w16n8.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 🔸 Header Layout */
+.header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* icons right */
+  padding: 20px 40px;
+  background: transparent;
+  z-index: 100;
+}
+
+/* 🔹 Left Section (Logo Image) */
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+/* 🏜️ Logo Image */
+.logo-img {
+  height: 220px;
+  width: 180px;
+  object-fit: contain;
+  background-color: transparent;
+  mix-blend-mode: multiply;
+  transition: transform 0.3s ease;
+}
+
+.logo-img:hover {
+  transform: scale(1.05);
+}
+
+/* ✨ Centered Text (Desert Quest) */
+.logo-text {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'KnightWarrior', sans-serif;
+  font-size: 6rem;
+  letter-spacing: 4px;
+  color: skyblue;
+  font-weight: normal;
+  margin: 0;
+  user-select: none;
+  text-align: center;
+
+  /* Gradient animation — no glow */
+  background-color: black;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 500%;
+  animation: colorFlow 5s linear infinite;
+}
+
+/* Gradient flow animation */
+@keyframes colorFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 🔸 Right side icons */
+.nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.icon {
+  color: black;
+  text-decoration: none;
+  font-size: 2rem;
+  transition: transform 0.25s ease-in-out, color 0.3s ease;
+  cursor: pointer;
+}
+
+.icon:hover {
+  color: #ffe15d;
+  transform: scale(1.2);
+}
+
+/* 📱 Responsive tweaks */
+@media (max-width: 768px) {
+  .logo-text {
+    font-size: 3rem;
+  }
+
+  .logo-img {
+    height: 80px;
+    width: 80px;
+  }
+
+  .nav-icons {
+    gap: 20px;
+  }
+}

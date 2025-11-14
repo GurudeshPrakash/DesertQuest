@@ -1,9 +1,7 @@
 
 html, body {
   height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
+ 
   font-family: "Poppins", sans-serif;
 }
 
@@ -15,13 +13,18 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("new.png");
+  flex-direction: column;
+
+
+  background: url("new.png");
+  background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
-  transition: background 1s ease-in-out;
+  background-attachment: fixed;
+
   overflow: hidden;
-    flex-direction: column;
+  transition: background 1s ease-in-out;
+
 }
 
 

@@ -7,8 +7,9 @@ import {
 import { doc, setDoc } from "@firebase/firestore";
 import { auth, db } from "../firebase";
 import "./style/auth.css";
-
+import { useWeather } from "../context/WeatherContext";
 const Signup = () => {
+ const { weatherMood } = useWeather();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -59,7 +60,7 @@ const Signup = () => {
       const token = await user.getIdToken();
       localStorage.setItem("authToken", token);
 
-      navigate("login");
+      navigate("/login");
     } catch (err) {
       console.error("Signup Error:", err);
       setError("Error: " + err.message);
@@ -69,11 +70,12 @@ const Signup = () => {
 
 
   return (
+    
     <div className="auth-container">
       {/* ☁️ Clouds */}
-      <div className="cloud"></div>
-      <div className="cloud"></div>
-      <div className="cloud"></div>
+      <div className="cloud cloud-1"></div>
+      <div className="cloud cloud-2"></div>
+   \
 
       <div className="auth-box">
         <h2 className="auth-title">Sign Up</h2>
