@@ -105,39 +105,7 @@ position: absolute;
   0% { transform: translateX(-200px); }
   100% { transform: translateX(calc(100vw + 300px)); }
 }
-/* .auth-cloud-1::before,
-.auth-cloud-1::after,
-.auth-cloud-2::before,
-.auth-cloud-2::after {
-  content: "";
-  position: absolute;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 50%;
-}
-.auth-cloud-1::before {
-  top: -15px;
-  left: 10px;
-  width: 40px;
-  height: 40px;
-}
-.auth-cloud-1::after {
-  top: -10px;
-  right: 10px;
-  width: 35px;
-  height: 35px;
-}
-.auht-cloud-2::before {
-  top: -20px;
-  left: 15px;
-  width: 50px;
-  height: 50px;
-}
-.auth-cloud-2::after {
-  top: -15px;
-  right: 20px;
-  width: 45px;
-  height: 45px;
-} */
+
 
 
 .auth-heat-waves {

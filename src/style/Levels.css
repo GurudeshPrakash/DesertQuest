@@ -180,65 +180,7 @@
   border-radius: 50% 50% 0 0;
 }
 
-/*  Cacti */
-/* .cactus-group {
-  position: absolute;
-  bottom: 40%;
-  z-index: 2;
-}
 
-.cactus-1 {
-  position: absolute;
-  bottom: 0;
-  right: 15%;
-  width: 25px;
-  height: 120px;
-  background: linear-gradient(to bottom, #2e7d32, #1b5e20);
-  border-radius: 12px;
-}
-.cactus-1::before {
-  content: "";
-  position: absolute;
-  top: 20px;
-  left: -22px;
-  width: 20px;
-  height: 45px;
-  background: #2e7d32;
-  border-radius: 8px;
-  transform: rotate(-25deg);
-}
-.cactus-1::after {
-  content: "";
-  position: absolute;
-  top: 50px;
-  right: -18px;
-  width: 16px;
-  height: 35px;
-  background: #2e7d32;
-  border-radius: 6px;
-  transform: rotate(20deg);
-}
-
-.cactus-2 {
-  position: absolute;
-  bottom: 0;
-  left: 20%;
-  width: 20px;
-  height: 90px;
-  background: linear-gradient(to bottom, #388e3c, #2e7d32);
-  border-radius: 10px;
-}
-.cactus-2::before {
-  content: "";
-  position: absolute;
-  top: 15px;
-  right: -15px;
-  width: 15px;
-  height: 30px;
-  background: #388e3c;
-  border-radius: 5px;
-  transform: rotate(15deg); */
-/* } */
 
 
 .title {
