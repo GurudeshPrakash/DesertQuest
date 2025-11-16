@@ -8,7 +8,7 @@ export const ThemeProvider = ({ children }) => {
     return savedTheme === "nightL";
   });
 
-  // Update body class & localStorage when theme changes
+  
   useEffect(() => {
     document.body.classList.toggle("nightL", isNightL);
     document.body.classList.toggle("day", !isNightL);

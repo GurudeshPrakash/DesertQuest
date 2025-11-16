@@ -11,7 +11,7 @@ export const WeatherProvider = ({ children }) => {
     moodClass: "sunny",
   });
 
-  // 🌦️ Fetch Weather Data (once)
+  
   useEffect(() => {
     const fetchWeather = async (lat, lon) => {
       try {
@@ -20,7 +20,7 @@ export const WeatherProvider = ({ children }) => {
           return;
         }
 
-        // ✅ Updated API endpoint
+    
         const url = `https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m`;
 
         console.log("Fetching weather from:", url);
@@ -28,7 +28,7 @@ export const WeatherProvider = ({ children }) => {
         const res = await fetch(url);
         const data = await res.json();
 
-        // 🕒 Get current hour’s temperature if available
+        
         const now = new Date();
         const currentHour = now.toISOString().slice(0, 13) + ":00";
         const hourIndex = data.hourly?.time?.indexOf(currentHour);
@@ -38,7 +38,7 @@ export const WeatherProvider = ({ children }) => {
             : null;
 
         if (currentTemp !== null) {
-          const current = { temperature: currentTemp, windspeed: 10 }; // no wind data in hourly call
+          const current = { temperature: currentTemp, windspeed: 10 }; 
           setWeather(current);
           updateWeatherMood(current);
         } else {
@@ -51,7 +51,7 @@ export const WeatherProvider = ({ children }) => {
       }
     };
 
-    // 📍 Get user location or fallback to Berlin
+    
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (pos) => {
@@ -64,7 +64,7 @@ export const WeatherProvider = ({ children }) => {
     }
   }, []);
 
-  // 🌡️ Update Mood
+  
   const updateWeatherMood = (current) => {
     const temp = current.temperature;
     const wind = current.windspeed;

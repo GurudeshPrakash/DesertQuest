@@ -3,7 +3,7 @@ import React, { createContext, useContext, useRef, useState, useEffect } from "r
 const MusicContext = createContext();
 
 export const MusicProvider = ({ children }) => {
-  const audioRef = useRef(new Audio("cowboys2.mp3")); // 🎵 File in /public
+  const audioRef = useRef(new Audio("cowboys2.mp3")); 
   const [isPlaying, setIsPlaying] = useState(true);
 
   useEffect(() => {
@@ -11,7 +11,7 @@ export const MusicProvider = ({ children }) => {
     audio.loop = true;
     audio.volume = 0.5;
 
-    // Handle browser autoplay restrictions
+    
     const startMusic = () => {
       if (isPlaying) {
         audio.play().catch((err) => console.log("Autoplay blocked:", err));
