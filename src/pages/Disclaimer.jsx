@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
-import "./style/Disclaimer.css";
+import "../style/Disclaimer.css";
 
 function Disclaimer() {
   const navigate = useNavigate();

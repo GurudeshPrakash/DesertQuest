@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
-import "./style/DesertAuth.css";
+import "../style/DesertAuth.css";
 
 const DesertAuth = () => {
   const navigate = useNavigate();

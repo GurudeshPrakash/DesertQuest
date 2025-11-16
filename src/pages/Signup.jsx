@@ -6,7 +6,7 @@ import {
 } from "firebase/auth";
 import { doc, setDoc } from "@firebase/firestore";
 import { auth, db } from "../firebase";
-import "./style/auth.css";
+import "../style/auth.css";
 import { useWeather } from "../context/WeatherContext";
 const Signup = () => {
  const { weatherMood } = useWeather();

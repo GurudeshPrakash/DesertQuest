@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaSignOutAlt, FaChartLine, FaStar, FaRedo } from "react-icons/fa";
-import "./style/Profile.css";
+import "../style/Profile.css";
 import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { doc, getDoc, onSnapshot, setDoc, updateDoc } from "@firebase/firestore";

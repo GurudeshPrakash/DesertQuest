@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
-import "./style/Levels.css";
+import "../style/Levels.css";
 
 function Levels() {
   const navigate = useNavigate();

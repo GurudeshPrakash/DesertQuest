@@ -12,17 +12,7 @@
 }
 
 /* 🎞️ Animated background for Levels page only */
-@keyframes levelBgFade {
-  0% {
-    background-image: url("new.png");
-  }
-  50% {
-    background-image: url("new.png")
-  }
-  100% {
-    background-image: url("new.png")
-  }
-}
+
 
 /* 🌤️ Themes */
 .day {
