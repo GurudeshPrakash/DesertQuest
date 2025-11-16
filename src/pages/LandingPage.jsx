@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
 import { useWeather } from "../context/WeatherContext";
-import "./style/LandingPage.css";
+import "../style/LandingPage.css";
 
 function LandingPage() {
   const navigate = useNavigate();

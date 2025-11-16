@@ -4,7 +4,7 @@ import { db, auth } from "../firebase"; // ✅ import auth
 import { collection, getDocs } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth"; // ✅ import this
 import { useNavigate } from "react-router-dom"; // ✅ for redirect
-import "./style/LeaderBoard.css";
+import "../style/LeaderBoard.css";
 
 const Leaderboard = () => {
   const [users, setUsers] = useState([]);

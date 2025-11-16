@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { auth, db, provider } from "../firebase";
-import "./style/auth.css";
+import "../style/auth.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -58,7 +58,7 @@ const Login = () => {
         });
       }
 
-      navigate("/");
+      navigate("/disclaimer");
     } catch (error) {
       console.error("Google Sign-In failed:", error);
       setError("Google sign-in failed. Please try again.");

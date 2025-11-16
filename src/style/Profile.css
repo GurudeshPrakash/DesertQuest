@@ -9,7 +9,7 @@
   flex-direction: column;
 
 
-  background: url("new.png");
+  background: url("../assets/new.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

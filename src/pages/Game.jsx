@@ -5,7 +5,7 @@ import CircularTimer from "../components/timer/timer";
 import Message from "../components/message/message";
 import { useWeather } from "../context/WeatherContext"; // ✅ Weather context
 import { useTheme } from "../context/ThemeContext"; // ✅ Theme context
-import "./style/Game.css";
+import "../style/Game.css";
 import { updateUserScore } from "../Services/Score";
 
 const Game = () => {

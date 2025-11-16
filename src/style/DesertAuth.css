@@ -11,7 +11,7 @@
   align-items: center;
   overflow: hidden;
   transition: background 1.5s ease-in-out, filter 1s ease-in-out;
-  background: url("new.png") no-repeat center center fixed;
+  background: url("../assets/new.png") no-repeat center center fixed;
   background-size: cover;
   z-index: 1;
 }

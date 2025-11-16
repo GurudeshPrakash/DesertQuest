@@ -149,7 +149,7 @@
   align-items: center;
   justify-content: center;
   color: #3b1d00;
-    background-image: url("new.png");
+    background-image: url("../assets/new.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -160,17 +160,7 @@
 
 
 /* Day & Night background gradients */
-@keyframes levelBgFade {
-  0% {
-    background-image: url("new.png");
-  }
-  50% {
-    background-image: url("new.png");
-  }
-  100% {
-    background-image: url("new.png");
-  }
-}
+
 
 .day {
   color: #2e1a09;
