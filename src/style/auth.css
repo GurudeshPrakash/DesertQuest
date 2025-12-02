@@ -92,6 +92,24 @@ position: absolute;
   }
 }
 
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.password-input {
+  padding-right: 40px; /* space for eye emoji */
+}
+
+.password-toggle {
+  position: absolute;
+  right: 25px;
+  top: 60%;
+  transform: translateY(-50%);
+  font-size: 1.4rem;
+  cursor: pointer;
+  user-select: none;
+}
 
 .auth-title {
   font-weight: bold;
