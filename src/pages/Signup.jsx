@@ -1,30 +1,23 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import {
-  createUserWithEmailAndPassword,
-  updateProfile,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "@firebase/firestore";
 import { auth, db } from "../firebase";
 import "../style/auth.css";
-import { useWeather } from "../context/WeatherContext";
+
 const Signup = () => {
- const { weatherMood } = useWeather();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const validateEmail=(email) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  };
+  const togglePassword = () => setShowPassword(!showPassword);
 
-  const validatePassword=(password) => {
-    const regex=/^(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/;
-    return regex.test(password);
-  };
+  const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const validatePassword = (password) =>
+    /^(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/.test(password);
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -34,31 +27,32 @@ const Signup = () => {
       setError("Please enter a valid email address.");
       return;
     }
+
     if (!validatePassword(password)) {
-      setError("Password must be at least 8 characters long, contain at least one uppercase letter and one special character.");
+      setError(
+        "Password must be at least 8 characters long, include 1 uppercase letter & 1 special character."
+      );
       return;
     }
 
     try {
-      // ✅ Create user
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       const user = userCredential.user;
 
-      // ✅ Update display name
       await updateProfile(user, { displayName: name });
 
-      // ✅ Store user info in Firestore
       await setDoc(doc(db, "users", user.uid), {
         uid: user.uid,
         name,
         email,
         highestScore: 0,
+        score: { Level1: 0, Level2: 0, Level3: 0 },
         createdAt: new Date().toISOString(),
       });
-
-      // ✅ Save token and redirect
-      const token = await user.getIdToken();
-      localStorage.setItem("authToken", token);
 
       navigate("/login");
     } catch (err) {
@@ -67,15 +61,10 @@ const Signup = () => {
     }
   };
 
-
-
   return (
-    
     <div className="auth-container">
-      {/* ☁️ Clouds */}
       <div className="cloud cloud-1"></div>
       <div className="cloud cloud-2"></div>
-   \
 
       <div className="auth-box">
         <h2 className="auth-title">Sign Up</h2>
@@ -90,6 +79,7 @@ const Signup = () => {
             onChange={(e) => setName(e.target.value)}
             required
           />
+
           <input
             type="email"
             placeholder="Email"
@@ -98,14 +88,23 @@ const Signup = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <input
-            type="password"
-            placeholder="Password"
-            className="auth-input"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+
+          {/* PASSWORD + EYE */}
+          <div className="password-wrapper">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              className="auth-input password-input"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+
+            <span className="password-toggle" onClick={togglePassword}>
+              {showPassword ? "👁️" : "⌣"}
+            </span>
+          </div>
+
           <button type="submit" className="auth-button">
             Sign Up
           </button>
@@ -117,8 +116,6 @@ const Signup = () => {
             Login
           </Link>
         </p>
-
-       
       </div>
     </div>
   );

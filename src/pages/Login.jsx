@@ -9,16 +9,14 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
+
   const navigate = useNavigate();
 
+  const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-  const validateEmail=(email) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  };
+  const togglePassword = () => setShowPassword(!showPassword);
 
-
-  // 🔹 Normal Email/Password Login
   const handleLogin = async (e) => {
     e.preventDefault();
     setError(null);
@@ -32,14 +30,13 @@ const Login = () => {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const token = await userCredential.user.getIdToken();
       localStorage.setItem("authToken", token);
-      navigate("disclaimer");
+      navigate("/disclaimer");
     } catch (err) {
       console.error("Login Error:", err);
       setError("Invalid email or password");
     }
   };
 
-  // 🔹 Google Login
   const handleGoogleLogin = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
@@ -67,10 +64,8 @@ const Login = () => {
 
   return (
     <div className="auth-container">
-      {/* ☁️ Clouds */}
       <div className="cloud cloud-1"></div>
       <div className="cloud cloud-2"></div>
- 
 
       <div className="auth-box">
         <h2 className="auth-title">Login</h2>
@@ -85,20 +80,28 @@ const Login = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <input
-            type="password"
-            placeholder="Password"
-            className="auth-input"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+
+          {/* PASSWORD + EYE */}
+          <div className="password-wrapper">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              className="auth-input password-input"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+
+            <span className="password-toggle" onClick={togglePassword}>
+              {showPassword ? "👁️" : "⌣"}
+            </span>
+          </div>
+
           <button type="submit" className="auth-button">
             Login
           </button>
         </form>
 
-        {/* 🔹 Google Login Button */}
         <button className="google-btn" onClick={handleGoogleLogin}>
           Sign in with Google
         </button>
