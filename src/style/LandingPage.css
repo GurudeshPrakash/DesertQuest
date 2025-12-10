@@ -19,7 +19,7 @@ body {
 
 }
 
-/* 🌤️ Weather Box */
+
 .weather-boxL {
   margin-top: 20px;
   background: rgba(255, 255, 255, 0.25);
@@ -38,7 +38,6 @@ body {
   animation: pulse 2s infinite ease-in-out;
 }
 
-/* 🌈 Weather Mood Overlay */
 .desert-containerL::before {
   content: "";
   position: absolute;
@@ -50,7 +49,7 @@ body {
   transition: background 1s ease-in-out;
 }
 
-/* Mood Gradients on top of your image */
+
 .sunny::before {
   background: linear-gradient(to top, rgba(247, 208, 122, 0.4), rgba(249, 247, 232, 0.2));
 }

@@ -5,7 +5,7 @@ import "../style/Disclaimer.css";
 
 function Disclaimer() {
   const navigate = useNavigate();
-  const { isNightL } = useTheme(); // access global theme
+  const { isNightL } = useTheme(); 
 
   const handleAccept = () => navigate("/level");
   const handleDecline = () => {

@@ -9,9 +9,8 @@ function LandingPage() {
   const { isNightL, toggleTheme } = useTheme();
   const { weather, loadingWeather, weatherMood } = useWeather();
 
-  // 🆕 GUESS button handler (navigate to /guess or open popup later)
   const handleGuessClick = () => {
-    navigate("/disclaimer"); // 👈 change path if needed
+    navigate("/disclaimer"); 
   };
 
   return (
@@ -50,7 +49,6 @@ function LandingPage() {
           )}
         </div>
 
-        {/* Buttons */}
         <div className="button-boxL">
           <button
             className="desert-btnL"
@@ -59,7 +57,7 @@ function LandingPage() {
             START
           </button>
 
-          {/* 🆕 New GUESS button */}
+          
           <button className="guess-btnL" onClick={handleGuessClick}>
             GUEST
           </button>

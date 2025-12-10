@@ -24,7 +24,6 @@ const Profile = () => {
             const data = userSnap.data();
             const scoreData = data.score || { Level1: 0, Level2: 0, Level3: 0 };
 
-            // ✅ Calculate total score (Level1 + Level2 + Level3)
             const totalScore =
               (scoreData.Level1 || 0) +
               (scoreData.Level2 || 0) +
@@ -33,7 +32,7 @@ const Profile = () => {
             setPlayer({
               name: data.name || "No Name",
               email: data.email || user.email,
-              highestScore: totalScore, // 👈 use total here
+              highestScore: totalScore, 
               avatarSeed: data.avatarSeed,
             });
 
@@ -78,7 +77,7 @@ const Profile = () => {
 
   const handleDesertClick = () => navigate("/level");
 
-  // 🆕 Change Avatar function
+
   const handleChangeAvatar = async () => {
     if (!player) return;
     setChangingAvatar(true);
@@ -115,7 +114,7 @@ const Profile = () => {
     );
   }
 
-  // 🎨 Avatar Generator
+
   const avatarUrl = `https://api.dicebear.com/9.x/adventurer/svg?seed=${encodeURIComponent(
     player.avatarSeed || player.name || "Explorer"
   )}`;
@@ -126,17 +125,15 @@ const Profile = () => {
       <div className="cloud cloud-1"></div>
       <div className="cloud cloud-2"></div>
 
-      {/* 🧭 Profile Content */}
       <div className="profile-content">
         <div className="profile-box">
           <div className="profile-header">
-            {/* 🎨 Avatar */}
+         
             <img src={avatarUrl} alt="Avatar" className="player-avatar" />
 
             <h2>{player.name}</h2>
             <p>{player.email}</p>
 
-            {/* 🆕 Change Avatar Button */}
             <button
               className="avatar-change-btn"
               onClick={handleChangeAvatar}
@@ -147,9 +144,9 @@ const Profile = () => {
             </button>
           </div>
 
-          {/* 🏆 Total Score (All Levels Added) */}
+        
           <div className="profile-stats">
-            <h3>🏆 Total Score: {player.highestScore}</h3>
+            <h3> Total Score: {player.highestScore}</h3>
           </div>
 
           <div className="profile-scores">
