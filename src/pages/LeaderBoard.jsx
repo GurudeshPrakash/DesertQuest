@@ -1,33 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { FaChartLine, FaStar, FaCrown } from "react-icons/fa";
-import { db, auth } from "../firebase"; // ✅ import auth
+import { db, auth } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
-import { onAuthStateChanged } from "firebase/auth"; // ✅ import this
-import { useNavigate } from "react-router-dom"; // ✅ for redirect
+import { onAuthStateChanged } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 import "../style/LeaderBoard.css";
 
 const Leaderboard = () => {
   const [users, setUsers] = useState([]);
   const [selectedLevel, setSelectedLevel] = useState("Level1");
+
   const [loading, setLoading] = useState(true);
   const [userLoggedIn, setUserLoggedIn] = useState(false);
+
+  const [page, setPage] = useState(0);
+  const playersPerPage = 5; 
   const navigate = useNavigate();
 
-  // ✅ Check login status
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUserLoggedIn(true);
-      } else {
+      if (user) setUserLoggedIn(true);
+      else {
         setUserLoggedIn(false);
-        navigate("/login"); // redirect to login page
+        navigate("/login");
       }
     });
-
     return () => unsubscribe();
   }, [navigate]);
 
-  // ✅ Fetch scores (only if logged in)
+ 
   useEffect(() => {
     if (!userLoggedIn) return;
 
@@ -49,7 +51,9 @@ const Leaderboard = () => {
           });
         });
 
+      
         userList.sort((a, b) => b[selectedLevel] - a[selectedLevel]);
+
         setUsers(userList);
       } catch (err) {
         console.error("Error fetching all users:", err);
@@ -61,17 +65,18 @@ const Leaderboard = () => {
     fetchAllScores();
   }, [selectedLevel, userLoggedIn]);
 
-  if (!userLoggedIn) {
-    return <div className="leaderboard-loading">Redirecting to login...</div>;
-  }
+  if (!userLoggedIn) return <div className="leaderboard-loading">Redirecting...</div>;
+  if (loading) return <div className="leaderboard-loading">Loading leaderboard...</div>;
 
-  if (loading) {
-    return <div className="leaderboard-loading">Loading leaderboard...</div>;
-  }
+ 
+  const startIndex = page * playersPerPage;
+  const endIndex = startIndex + playersPerPage;
+  const paginatedUsers = users.slice(startIndex, endIndex);
+
+  const totalPages = Math.ceil(users.length / playersPerPage);
 
   return (
     <div className="leaderboard-container">
-      {/* ☁️ Clouds */}
       <div className="cloud cloud-1"></div>
       <div className="cloud cloud-2"></div>
 
@@ -80,18 +85,19 @@ const Leaderboard = () => {
           <FaChartLine /> Global Leaderboard
         </h1>
 
-        {/* Level Selector */}
         <select
           className="level-select"
           value={selectedLevel}
-          onChange={(e) => setSelectedLevel(e.target.value)}
+          onChange={(e) => {
+            setSelectedLevel(e.target.value);
+            setPage(0); 
+          }}
         >
           <option value="Level1">🏆 Beginner</option>
-          <option value="Level2">🥈 Intermediate</option>
-          <option value="Level3">🥉 Advanced</option>
+          <option value="Level2">🥈 Medium</option>
+          <option value="Level3">🥉 Hard</option>
         </select>
 
-        {/* 🏅 Leaderboard Table */}
         <table className="leaderboard-table">
           <thead>
             <tr>
@@ -101,36 +107,54 @@ const Leaderboard = () => {
               <th>Score</th>
             </tr>
           </thead>
+
           <tbody>
-            {users
-              .sort((a, b) => b[selectedLevel] - a[selectedLevel])
-              .map((user, index) => (
-                <tr key={user.id}>
-                  <td>{index === 0 ? <FaCrown color="gold" /> : index + 1}</td>
-                  <td>{user.name}</td>
-                  <td>{user.email}</td>
-                  <td>
-                    <FaStar className="score-icon" /> {user[selectedLevel]} pts
-                  </td>
-                </tr>
-              ))}
+            {paginatedUsers.map((user, index) => (
+              <tr key={user.id}>
+                <td>
+                  {startIndex + index === 0 ? (
+                    <FaCrown color="gold" />
+                  ) : (
+                    startIndex + index + 1
+                  )}
+                </td>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>
+                  <FaStar className="score-icon" /> {user[selectedLevel]} pts
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
-        
-        <div className="button-group">
-          <button className="back-btn" onClick={() => navigate("/level")}>
-          ⬅ Back
-        </button>
-        <button className="back-btn" onClick={() => navigate("/profile")}>
-  👤 View Profile
-</button>
 
+      
+        <div className="pagination-buttons">
+          <button
+            className="page-btn"
+            disabled={page === 0}
+            onClick={() => setPage((p) => p - 1)}
+          >
+            ⬅ Previous
+          </button>
 
+          <span className="page-number">
+            Page {page + 1} of {totalPages}
+          </span>
 
-
-
+          <button
+            className="page-btn"
+            disabled={page >= totalPages - 1}
+            onClick={() => setPage((p) => p + 1)}
+          >
+            Next ➡
+          </button>
         </div>
-        
+
+        <div className="button-group">
+          <button className="back-btn" onClick={() => navigate("/level")}> Back</button>
+          <button className="back-btn" onClick={() => navigate("/profile")}> View Profile</button>
+        </div>
       </div>
     </div>
   );

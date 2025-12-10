@@ -98,7 +98,7 @@ position: absolute;
 }
 
 .password-input {
-  padding-right: 40px; /* space for eye emoji */
+  padding-right: 40px; 
 }
 
 .password-toggle {

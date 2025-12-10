@@ -5,7 +5,7 @@ import "../style/DesertAuth.css";
 
 const DesertAuth = () => {
   const navigate = useNavigate();
-  const { isNightL, toggleTheme } = useTheme(); // for optional toggle button
+  const { isNightL, toggleTheme } = useTheme(); 
 
   const handleLogin = () => {
     console.log("➡ Navigating to Login");

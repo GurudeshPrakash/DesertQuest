@@ -15,7 +15,7 @@ function Levels() {
 
   return (
     <div className={`levels-page desert-containerL ${isNightL ? "night" : "day"}`}>
-      {/* Effects */}
+      
       <div className="heat-waves"></div>
       
       <div className="moon"></div>
@@ -23,11 +23,9 @@ function Levels() {
       <div className="cloud cloud-1"></div>
       <div className="cloud cloud-2"></div>
 
-      {/* Titles */}
       <h1 className="title">HAVE NICE DAY</h1>
       <p className="subtitle">LET’S BEGIN</p>
 
-      {/* Level Buttons */}
       <div className="button-box1">
         <button className="desert-btn" onClick={() => handleLevelSelect("easy")}>
           EASY
@@ -40,7 +38,7 @@ function Levels() {
         </button>
       </div>
 
-      {/* Desert Landscape */}
+     
     
 
       

@@ -3,8 +3,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { fetchQuizData } from "../Services/Heart";
 import CircularTimer from "../components/timer/timer";
 import Message from "../components/message/message";
-import { useWeather } from "../context/WeatherContext"; // ✅ Weather context
-import { useTheme } from "../context/ThemeContext"; // ✅ Theme context
+import { useWeather } from "../context/WeatherContext"; 
+import { useTheme } from "../context/ThemeContext"; 
 import "../style/Game.css";
 import { updateUserScore } from "../Services/Score";
 
@@ -24,47 +24,32 @@ const Game = () => {
   const level = levelMap[levelParam];
 
   const { isNightL } = useTheme();
-  const { weatherMood } = useWeather(); // ✅ bring in weather mood
+  const { weatherMood } = useWeather();
 
-  // 🕒 Timer duration by level
   const getTimeLimit = (level) => {
     switch (level) {
-      case 1:
-        return 60;
-      case 2:
-        return 45;
-      case 3:
-        return 20;
-      default:
-        return 0;
+      case 1: return 60;
+      case 2: return 45;
+      case 3: return 20;
+      default: return 0;
     }
   };
 
-  // 💀 Penalty
   const getPenalty = (level) => {
     switch (level) {
-      case 1:
-        return -10;
-      case 2:
-        return -10;
-      case 3:
-        return -10;
-      default:
-        return -10;
+      case 1: return -10;
+      case 2: return -10;
+      case 3: return -10;
+      default: return -10;
     }
   };
 
-  // 🎯 Pre-score (starting score)
   const getPreScore = (level) => {
     switch (level) {
-      case 1:
-        return 30;
-      case 2:
-        return 20;
-      case 3:
-        return 10;
-      default:
-        return 0;
+      case 1: return 200;
+      case 2: return 20;
+      case 3: return 10;
+      default: return 0;
     }
   };
 
@@ -74,13 +59,12 @@ const Game = () => {
   const [quizImage, setQuizImage] = useState("");
   const [correctAnswer, setCorrectAnswer] = useState(null);
   const [answers, setAnswers] = useState([]);
-  const [score, setScore] = useState(getPreScore(level)); // ✅ Start with pre-score
+  const [score, setScore] = useState(getPreScore(level));
   const [questionCount, setQuestionCount] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [resultMessage, setResultMessage] = useState("");
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
-  // Generate 4 answer options
   const generateAnswerOptions = (correct) => {
     const options = new Set([correct]);
     while (options.size < 4) {
@@ -90,14 +74,13 @@ const Game = () => {
     return [...options].sort(() => Math.random() - 0.5);
   };
 
-  // Load quiz data
   const loadQuiz = async () => {
-    if (questionCount >= 10 || score <= 0) return;
+    if (questionCount >= 30 || score <= 0) return;
     const quizData = await fetchQuizData();
     if (quizData) {
       const correct = Number(quizData.solution);
       const options = generateAnswerOptions(correct);
-       setIsImageLoaded(false);
+      setIsImageLoaded(false);
       setQuizImage(quizData.question);
       setCorrectAnswer(correct);
       setAnswers(options);
@@ -148,10 +131,11 @@ const Game = () => {
         weatherMood.moodClass
       }`}
     >
-      {/* Heat waves */}
-     
-    
-      
+
+      {/* ⭐ USER INSTRUCTION TEXT */}
+      <div className="heart-info-text">
+        Count the number of hearts ❤️
+      </div>
 
       {/* Clouds */}
       <div className="cloud cloud-1"></div>
@@ -162,20 +146,28 @@ const Game = () => {
       ) : (
         <div className="game-contentL">
           <div className="headerL">
-            <CircularTimer timeLimit={timeLimit} onTimeEnd={handleTimeEnd} isPaused={!isImageLoaded}/>
+            <CircularTimer
+              timeLimit={timeLimit}
+              onTimeEnd={handleTimeEnd}
+              isPaused={!isImageLoaded}
+            />
             <div className="score-boxL">Score: {score}</div>
           </div>
 
           {quizImage && (
             <div className="quiz-sectionL">
-              <img src={quizImage} alt="Quiz" className="quiz-imageL"
-               onLoad={() => setIsImageLoaded(true)} // 🆕 start timer when image loads
+              <img
+                src={quizImage}
+                alt="Quiz"
+                className="quiz-imageL"
+                onLoad={() => setIsImageLoaded(true)}
                 onError={() => {
-                console.error("❌ Image failed to load — stopping timer");
-                setIsImageLoaded(false);
-                handleGameOver(); // stop the game if image fails
-      }}
-               />
+                  console.error("❌ Image failed to load");
+                  setIsImageLoaded(false);
+                  handleGameOver();
+                }}
+              />
+
               <div className="answers-gridL">
                 {answers.map((ans, i) => (
                   <button
@@ -191,9 +183,6 @@ const Game = () => {
           )}
         </div>
       )}
-
-      
-      
     </div>
   );
 };

@@ -12,7 +12,7 @@
   color: #3b1d00;
 }
 
-/* Heat waves shimmer */
+
 .heat-waves {
   position: absolute;
   width: 100%;
@@ -25,13 +25,24 @@
   animation: heatWave 3s infinite linear;
   opacity: 0.5;
 }
+.heart-info-text {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 40px;
+  font-weight: 600;
+  color: white;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+  z-index: 2000;
+}
+
 
 @keyframes heatWave {
   0% { transform: translateY(0); }
   100% { transform: translateY(-10px); }
 }
 
-/* Sun */
 .sun {
   position: absolute;
   top: 40px;
@@ -44,7 +55,6 @@
   z-index: 0;
 }
 
-/* Clouds */
 .cloud {
    position: absolute;
   background: rgba(255, 255, 255, 0.9);
@@ -98,13 +108,12 @@
   color: #3b1d00;
 }
 
-/* Quiz image */
 .quiz-sectionL {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: -40px; /* lift everything upward */
+  margin-top: -40px;
   z-index: 5;
   position: relative;
 }
@@ -159,17 +168,7 @@
 
 
 
-/* Day & Night background gradients */
 
-
-.day {
-  color: #2e1a09;
-}
-
-.nightL {
-  
-  color: #fff8e1;
-}
 
 
 

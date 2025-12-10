@@ -1,7 +1,7 @@
 
 .leaderboard-container {
   position: relative;
-  min-height: 100vh;
+  min-height: 10vh;
 
   display: flex;
   justify-content: center;
@@ -19,6 +19,31 @@
   max-width: 900px;
   text-align: center;
   z-index: 10;
+}
+.pagination-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  gap: 12px;
+}
+
+.page-btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.page-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.page-number {
+  font-weight: bold;
+  font-size: 16px;
 }
 
 .leaderboard-title {
@@ -113,7 +138,6 @@
   transform: scale(1.05);
 }
 
-/* ☁️ Clouds */
 .cloud {
   position: absolute;
   background: rgba(255, 255, 255, 0.8);
