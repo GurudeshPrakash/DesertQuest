@@ -10,8 +10,10 @@ import Level from "./pages/Levels";
 import Header from "./components/header/header";
 import Profile from "./pages/Profile";
 import Leaderboard from "./pages/LeaderBoard";
+
 import { WeatherProvider } from "./context/WeatherContext";
-import { MusicProvider } from "./context/MusicContext"; 
+import { MusicProvider } from "./context/MusicContext";
+
 import MusicToggleButton from "./components/musicToggleButton/MusicToggleButton"; 
 
 import "./App.css";
@@ -19,7 +21,7 @@ import "./App.css";
 function App() {
   return (
     <WeatherProvider>
-      <MusicProvider>
+      <MusicProvider>    {/* ✅ FIX: MusicProvider added */}
         
         <Header />
         <MusicToggleButton />
@@ -35,7 +37,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
         </Routes>
-        
+
       </MusicProvider>
     </WeatherProvider>
   );
