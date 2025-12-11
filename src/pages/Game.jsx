@@ -46,7 +46,7 @@ const Game = () => {
 
   const getPreScore = (level) => {
     switch (level) {
-      case 1: return 200;
+      case 1: return 30;
       case 2: return 20;
       case 3: return 10;
       default: return 0;
@@ -132,12 +132,12 @@ const Game = () => {
       }`}
     >
 
-      {/* ⭐ USER INSTRUCTION TEXT */}
+    
       <div className="heart-info-text">
         Count the number of hearts ❤️
       </div>
 
-      {/* Clouds */}
+    
       <div className="cloud cloud-1"></div>
       <div className="cloud cloud-2"></div>
 
@@ -162,7 +162,7 @@ const Game = () => {
                 className="quiz-imageL"
                 onLoad={() => setIsImageLoaded(true)}
                 onError={() => {
-                  console.error("❌ Image failed to load");
+                  console.error(" Image failed to load");
                   setIsImageLoaded(false);
                   handleGameOver();
                 }}
